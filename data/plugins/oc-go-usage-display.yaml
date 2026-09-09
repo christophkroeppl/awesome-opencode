@@ -1,0 +1,51 @@
+name: oc-go-usage-display
+repo: https://github.com/christophkroeppl/oc-go-usage-display
+tagline: "OpenCode Go usage in sidebar + statusline: 5h, 7d, 30d windows."
+description: >-
+  OpenCode Go subscription usage plugin (dual target). TUI target renders a
+  `Go Usage` sidebar block with muted `5h` / `7d` / `30d` rows plus a compact
+  `session_prompt_right` statusline (e.g. `Go 5h 42% | 7d 15%`). Server target
+  exposes a `go_usage` tool returning a JSON snapshot and a human-readable
+  line (`Go 5h 42% (reset 3h12m) | 7d 15% | 30d 61%`). Zero popups: no
+  automatic toast; failures keep stale data and never break the host.
+  Auth via OPENCODE_GO_API_KEY Bearer for GET https://opencode.ai/zen/go/v1/usage
+  or signed-in opencode-go provider key from auth.json. 60s cache (memory + disk).
+scope:
+  - global
+  - project
+tags:
+  - opencode-plugin
+  - opencode-go
+  - usage
+  - tui
+  - sidebar
+  - statusline
+min_version: "1.4.3"
+homepage: https://github.com/christophkroeppl/oc-go-usage-display
+installation: |
+  ### npm (global)
+  ```sh
+  npm install oc-go-usage-display
+  npx oc-go-usage-display-init
+  # Restart opencode afterwards. Requires Node >= 22, opencode >= 1.4.3.
+  ```
+
+  ### One-shot (no install)
+  ```sh
+  npx -y oc-go-usage-display@1.0.0 oc-go-usage-display-init
+  ```
+
+  ### Manual entries
+  ```jsonc
+  // opencode.jsonc — server target (go_usage tool)
+  {
+    "plugin": ["oc-go-usage-display"]
+  }
+  ```
+
+  ```jsonc
+  // tui.json — TUI target (Go Usage sidebar + statusline)
+  {
+    "plugin": [["oc-go-usage-display", { "sidebar": true, "statusline": true }]]
+  }
+  ```
