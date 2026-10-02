@@ -33,13 +33,19 @@ installation: |
   Requires Node >= 22 and opencode >= 1.18. The Kilo target additionally needs
   the Kilo Code CLI (>= 7.8). Restart the host(s) after installing.
 
-  ### Install (global npm — works with no extra flags)
+  ### npm (project-local - recommended)
+  ```sh
+  npm install oc-go-usage-display@latest
+  npx oc-go-usage-display-init --copy
+  ```
+
+  ### npm (global)
   ```sh
   npm install -g oc-go-usage-display@latest
   oc-go-usage-display-init --copy
   ```
 
-  ### Install (Bun, project-local)
+  ### Bun
   ```sh
   bun add oc-go-usage-display@latest
   bunx oc-go-usage-display-init --copy
@@ -47,19 +53,8 @@ installation: |
 
   ### One-shot (nothing added to your project)
   ```sh
-  bunx -p oc-go-usage-display@latest oc-go-usage-display-init --copy
+  npx -p oc-go-usage-display@latest oc-go-usage-display-init --copy
   ```
-
-  ### Install (npm, project-local)
-  ```sh
-  npm install --legacy-peer-deps oc-go-usage-display@latest
-  npx oc-go-usage-display-init --copy
-  ```
-
-  `--legacy-peer-deps` is required there: a plain project-local
-  `npm install oc-go-usage-display@latest` currently fails with ERESOLVE because
-  of the exact-pinned optional UI peers. The global install and Bun are
-  unaffected.
 
   `--copy` is the default and self-contained (`--symlink` is dev-only). Hosts are
   detected automatically (binary on PATH or config dir): one detected host
@@ -79,16 +74,16 @@ installation: |
 
   ### Project scope (`.opencode/` instead of `~/.config/opencode`)
   ```sh
-  bunx -p oc-go-usage-display@latest oc-go-usage-display-init --copy --config-dir .opencode
+  npx -p oc-go-usage-display@latest oc-go-usage-display-init --copy --config-dir .opencode
   ```
 
-  ### Manual entries (no files copied — the host resolves the package)
+  ### Manual entries (no files copied - the host resolves the package)
   ```jsonc
-  // opencode.jsonc — server target (go_usage tool)
+  // opencode.jsonc - server target (go_usage tool)
   { "plugin": ["oc-go-usage-display@latest"] }
   ```
   ```jsonc
-  // tui.json — TUI target (Go Usage sidebar + statusline)
+  // tui.json - TUI target (Go Usage sidebar + statusline)
   { "plugin": [["oc-go-usage-display@latest", { "sidebar": true, "statusline": true }]] }
   ```
 
