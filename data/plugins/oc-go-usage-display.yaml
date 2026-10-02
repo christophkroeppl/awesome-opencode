@@ -63,8 +63,8 @@ installation: |
 
   `--copy` is the default and self-contained (`--symlink` is dev-only). Hosts are
   detected automatically (binary on PATH or config dir): one detected host
-  installs silently, two or more offer a numbered multiselect, none detected
-  installs both. Narrow it with `--target opencode|kilo|all`,
+  installs silently, two or more prompt for a multiselect in an interactive
+  shell, nothing detected installs both. Narrow it with `--target opencode|kilo|all`,
   `--config-dir <path>` (opencode) or `--kilo-config-dir <path>`.
 
   ### Kilo Code
